@@ -7,7 +7,8 @@
 // @lc code=start
 class Solution {
 public:
-    int reverse(int x) {
+    int reverse(int x) 
+    {
         
     }
 };
