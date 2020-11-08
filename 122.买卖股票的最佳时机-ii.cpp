@@ -14,6 +14,7 @@ public:
         {
             money=money+max(0,prices[i+1]-prices[i]); //每次的收益就是有钱可赚的时候，（画出折线图就是曲线上升的波段）
         }
+        
         return money;    
     }
 };
