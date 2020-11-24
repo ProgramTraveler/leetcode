@@ -17,7 +17,7 @@ public:
             else return false;
         }
         return true;*/
-        
+        //换种方法
         //如果两个字符串的长度不一样，直接返回false
         if(s.size()!=t.size()) return false;
         //定义一个26个大小的数组，用来记录26个小写字母
