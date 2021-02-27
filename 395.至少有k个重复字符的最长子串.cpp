@@ -43,7 +43,6 @@ public:
         if (left < n-1) {
             res = max(res, longestSubstring(s.substr(left, n-1-left+1), k));
         }
-
         return res;
     }
 };
