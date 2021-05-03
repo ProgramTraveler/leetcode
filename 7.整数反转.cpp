@@ -8,22 +8,16 @@
 class Solution {
 public:
     int reverse(int x) {
-    int ans = 0;
-    while (x != 0) 
-        {
-            int pop = x % 10;
-            //对数值进行越界判断
-            if (ans > INT_MAX / 10 || (ans == INT_MAX / 10 && pop > 7)) 
-                return 0;
-            if (ans < INT_MIN / 10 || (ans == INT_MIN / 10 && pop < -8)) 
-                return 0;
-            //没有溢出就正常操作
-            ans = ans * 10 + pop;
-            x=x / 10;
+        int res = 0;
+        while (x != 0) {
+            //x和后面的判断还是不要调换位置
+            if (x > 0 && res > (INT_MAX - x % 10) / 10) return 0;
+            if (x < 0 && res < (INT_MIN - x % 10) / 10) return 0;
+            res = res * 10 + x % 10;
+            x = x / 10;
         }
-        return ans;
+        return res;
     }
 };
-
 // @lc code=end
 
