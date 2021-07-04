@@ -8,14 +8,14 @@
 class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
-        vector<int> n(nums.size(),0);
-        vector<int> res(2,0);
-        for(int i = 0; i < nums.size(); i ++) {
-            n[nums[i] - 1] ++;
+        vector<int> tempSt(nums.size(), 0); //记录数字出现的次数
+        vector<int> res(2, 0); //返回最终的结果
+        for (int i = 0; i < nums.size(); i ++) {
+            tempSt[nums[i] - 1] ++;
         }
-        for(int i = 0; i < nums.size(); i ++) {
-            if(n[i] == 2) res[0] = i + 1;
-            else if(n[i] == 0) res[1] = i + 1;
+        for (int i = 0; i < nums.size(); i ++) {
+            if (tempSt[i] == 2) res[0] = i + 1;
+            if (tempSt[i] == 0) res[1] = i + 1;
         }
         return res;
     }
