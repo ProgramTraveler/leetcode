@@ -8,22 +8,15 @@
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        //定义左右指针
         int left = 0, right = 0;
-        //开始从头遍历
-        while (right<nums.size()) {
-            //如果当前数不为0，将左指针的数和右指针的数进行交换
-            if (nums[right]!=0) {
-                //cout<<nums[right]<<endl;
-                swap(nums[left], nums[right]);
-                //左指针移动
-                left++;
+        while (right < nums.size()) {
+            if (nums[right] != 0) { //当前元素非0
+                swap(nums[left], nums[right]); //交换左右两指针的数
+                left ++;
             }
-            //右指针移动
-            right++;
+            right ++;
         }
     }
 };
-
 // @lc code=end
 
