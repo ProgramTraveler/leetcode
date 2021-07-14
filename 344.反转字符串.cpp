@@ -7,7 +7,7 @@
 // @lc code=start
 class Solution {
 public:
-    void reverseString(vector<char>& s) 
+    /*void reverseString(vector<char>& s) 
     {
         stack<char> ans; //利用栈翻转
         //把元素存在栈里
@@ -21,6 +21,17 @@ public:
             ans.pop();
         }
 
+    }*/
+     void reverseString(vector<char>& s) {
+        int left = 0, right = s.size() - 1;
+        while (left <= right) {
+            char temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+            left ++;
+            right --;
+        }
+        //return s;
     }
 };
 // @lc code=end
