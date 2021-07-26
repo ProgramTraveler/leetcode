@@ -28,6 +28,5 @@ public:
         return n - d.size();
     }
 };
-
 // @lc code=end
 
