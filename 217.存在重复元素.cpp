@@ -8,11 +8,12 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        //定义一个map来记录数字的个数
-        unordered_map<int,int> ans;
-        //开始比较
-        for(auto x:nums)
-            if (ans[x] ++ ) return true;
+        unordered_map<int, int> ma;
+        for (int i = 0;i < nums.size(); i ++) {
+            if (ma[nums[i]] ++ >= 1) {
+                return true;
+            }
+        }
         return false;
     }
     /*
