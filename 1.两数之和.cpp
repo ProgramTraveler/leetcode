@@ -7,17 +7,16 @@
 // @lc code=start
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target)
-    {
-        map<int,int>m;
-        for(int i=0;i<nums.size();i++) m[nums[i]]=i;
-        for(int i=0;i<nums.size();i++){
-            //如果在map里存在这个数而且还不是它自己本身
-            if(m.find(target-nums[i])!=m.end() && m[target-nums[i]]!=i){
-                return{i,m[target-nums[i]]};
+     vector<int> twoSum(vector<int>& nums, int target) {
+        map<int,int> m;
+        for(int i = 0;i < nums.size();i ++) m[nums[i]] = i;
+        //cout<<m.find(7)<<" "<<m.end()<<endl;
+        for(int i = 0; i < nums.size(); i ++){
+            if(m.find(target - nums[i]) != m.end() && m[target - nums[i]] != i) {
+                return{ i, m[target-nums[i]] };
             }
         }
-        return{0,0};
+        return {0,0};
         
         //之前使用的暴力求解，在第二次遇到后看见题解里有hash表的 
          /*
