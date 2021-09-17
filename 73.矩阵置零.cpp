@@ -8,23 +8,24 @@
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
-        if (matrix.size() == 0 || matrix[0].size() == 0) return;
-        vector<vector<int>> newM(matrix); //创建一个新的数组
-        int M = matrix.size(), N = matrix[0].size(); //原数组的行数和列数
-        //对数组进行遍历
-        for (int r = 0; r < M; ++r) {
-            for (int c = 0; c < N; ++c) {
-                if (newM[r][c] == 0) { //如果当前的数字是零
-                    //将这一列变为0
-                    for (int j = 0; j < N; ++j) {
-                        matrix[r][j] = 0;
-                    }
-                    //将这一行变为0
-                    for (int i = 0; i < M; ++i) {
-                        matrix[i][c] = 0;
-                    }
+        vector<int> row; //记录零出现的行号
+        vector<int> col; //记录零出现的列号
+        for (int i = 0; i < matrix.size(); i ++) {
+            for (int j = 0; j < matrix[0].size(); j ++) {
+                if (matrix[i][j] == 0) { //对零出现的位置进行记录
+                    row.push_back(i); 
+                    col.push_back(j);
                 }
             }
+        }
+        //分别对零出现的行和列进行赋零操作
+        for (int i = 0; i < row.size(); i ++) {
+            for (int j = 0; j < matrix[0].size(); j ++) 
+                matrix[row[i]][j] = 0;
+        }
+        for (int i = 0; i < col.size(); i ++) {
+            for (int j = 0; j < matrix.size(); j ++) 
+                matrix[j][col[i]] = 0;
         }
     }
 };
