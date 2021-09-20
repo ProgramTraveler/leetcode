@@ -7,17 +7,13 @@
 // @lc code=start
 class Solution {
 public:
-    bool canConstruct(string ransomNote, string magazine) 
-    {
-       int hash[26]={0}; //记录magazine上的子母数
-       for(char x:magazine)
-       {
-           hash[x-'a']+=1; //记录字母数目
-       }
-       for(char x:ransomNote)
-        {
-            hash[x-'a']-=1;//被使用，字母数目减一
-            if(hash[x-'a']<0) return false; //如果已经透支了，就返回false
+    bool canConstruct(string ransomNote, string magazine) {
+        int ap[26] = {0}; //记录杂志中相应字母的个数
+        for (int i = 0; i < magazine.size(); i ++)
+            ap[magazine[i] - 'a'] ++;
+        for (int i = 0; i < ransomNote.size(); i ++) { 
+            if (ap[ransomNote[i] - 'a'] == 0) return false;
+            else ap[ransomNote[i] - 'a'] --;
         }
         return true;
     }
