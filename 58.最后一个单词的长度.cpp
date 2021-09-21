@@ -5,7 +5,8 @@
  */
 
 // @lc code=start
-class Solution {
+
+/*class Solution {
 public:
     int lengthOfLastWord(string s) 
     {
@@ -25,6 +26,25 @@ public:
            count++;
        }
        return count;     
+    }
+};*/
+
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        bool flag = true; //当遇到字母后变为false，开始计数
+        int res = 0;
+        for (int i = s.size() - 1; i >= 0; i --) {
+            if (s[i] == ' ' && flag) continue;
+
+            else if (s[i] == ' ' && !flag) break;
+            
+            else if (s[i] != ' ') {
+                res ++;
+                flag = false;
+            }
+        }
+        return res;
     }
 };
 // @lc code=end
