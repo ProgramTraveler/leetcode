@@ -32,24 +32,20 @@ public:
     */
 
     //hash很好理解，但这个题的标准解法还是用快慢指针
-     bool hasCycle(ListNode *head)
-     {
-         if(head==NULL) return false;
-         //保证快慢指针相差一个节点
-         ListNode *fast=head->next; //设置一个快指针
-         ListNode *slow=head; //设置一个慢指针（也可以拿head自己当慢指针。但为了方便理解是设置一个慢指针）
-         while(slow!=NULL && fast!=NULL && fast->next!=NULL)
-         {
-             if(fast==slow) return true; //如果快指针追上了慢指针，说明这个是个环
-             else
-             {
-                 fast=fast->next->next; //快指针每次跑两个节点
-                 slow=slow->next; //慢指针一次一个节点
-             }
-         }
-         return false;
-     }
+    bool hasCycle(ListNode *head) {
+        if (head == NULL || head -> next == NULL) return false; //就一个数据没有环
+        ListNode *slow = head;
+        ListNode *fast = head -> next;
+        while (slow != NULL && fast != NULL && fast -> next != NULL) { //对fast的是否为空的判断要放在fast -> next 的判断之前
+            if (fast == slow) return true;
+            else {
+                slow = slow -> next;
+                fast = fast -> next -> next;
+            }
+        }
+        return false;
 
+    }
 };
 // @lc code=end
 
