@@ -28,7 +28,8 @@ public:
             }
             p = p -> next; //当前节点是目标值的话，就跳过
         }
-        q -> next = nullptr; //用来处理当目标值在最后的位置的情况
+        //用来处理当目标值在最后的位置的情况
+        q -> next = nullptr; 
         return due -> next;
     }
 };
