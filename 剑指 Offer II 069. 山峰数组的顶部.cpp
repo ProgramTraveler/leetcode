@@ -15,3 +15,14 @@ public:
             } 
         }
         return res;*/
+
+        int l = 0, r = arr.size() - 1;
+        while (l < r) {
+            int mid = l + r + 1 >> 1;
+            cout<< mid <<endl;
+            if (arr[mid - 1] < arr[mid]) l = mid;
+            else r = mid - 1;
+        }
+        return r;
+    }
+};
