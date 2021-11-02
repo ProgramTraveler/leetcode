@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -15,10 +16,12 @@
  */
 class Solution {
 public:
-    void deleteNode(ListNode* node) 
-    {
-        node->val=node->next->val;
-        node->next=node->next->next;
+    void deleteNode(ListNode* node) {
+        //其实就是把当前结点的值给改了，在把后面结点释放掉
+        
+        node -> val = node -> next -> val; //把当前删除的结点覆盖掉
+        node -> next = node -> next -> next; //把后面结点给释放掉
+    
     }
 };
 // @lc code=end
