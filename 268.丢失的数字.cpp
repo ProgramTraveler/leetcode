@@ -15,7 +15,7 @@ public:
             res -= nums[i];
         }
         return res;
-        /*
+        /* 异或是最常用的方法
         int res = nums.size();
         for(int i = 0; i < nums.size(); ++ i)
             res = res ^ i ^ nums[i];            // a^b^b = a;
