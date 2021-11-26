@@ -24,6 +24,25 @@ public:
         else if(root -> val > val) return searchBST(root -> left, val);//如果当前数比给定值大，就去它的左子树搜索
 
         else return root; //相等，就返回该节点*/
+    
+        //迭代的写法，老写递归没意思
+        TreeNode* node = root;
+
+        while (node) {
+            /*
+            if (node -> val > val) node = node -> left;
+            if (node -> val == val) return node;
+            if (node -> val < val) node = node -> right;
+            */
+            
+            if (node -> val == val) return node;
+            else if (node -> val > val) node = node -> left;
+            else node = node -> right;
+
+            //node = val < node -> val ? node -> left : node -> right;
+        }
+        return nullptr;
+    }
     }
 };
 // @lc code=end
