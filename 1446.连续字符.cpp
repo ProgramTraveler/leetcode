@@ -5,7 +5,10 @@
  */
 
 // @lc code=start
-class Solution {
+
+//不知道为什么第一次做的时候写的这么复杂化，可能是有点low
+
+/*class Solution {
 public:
     int maxPower(string s) {
         //设置一个数组存储26个数字，用来代表26个字母中连续重复的次数
@@ -38,6 +41,9 @@ public:
         //返回最终结果
         return Max;
     }
-};
+};*/
+
+//第二次几行就能解决
+
 // @lc code=end
 
