@@ -44,6 +44,22 @@ public:
 };*/
 
 //第二次几行就能解决
-
+class Solution {
+public:
+    int maxPower(string s) {
+        int res = 1, index = 1;
+        for (int i = 1; i < s.size(); i ++) {
+            if (s[i - 1] != s[i]) 
+                //res = max(res, index);
+                index = 1;
+            else 
+                index ++;
+                
+            res = max(res, index);
+            
+        }
+        return res;
+    }
+};
 // @lc code=end
 
