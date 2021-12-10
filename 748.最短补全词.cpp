@@ -22,18 +22,20 @@ public:
         string res; //保存最后的结果 
         for (int i = 0; i < words.size(); i ++) {
             //array<int, 26> apltemp{};
-            int apltemp[26] = {0};
-            for (auto ch : words[i]) apltemp[ch - 'a'] ++;
+            int apltemp[26] = {0}; //数组初始化
+            for (auto ch : words[i]) apltemp[ch - 'a'] ++; //记录当前字符串的字符个数
 
-            bool index = true;
-            for (int j = 0; j < 26; j ++) {
-                if (apltemp[j] < alp[j]) {
+            bool index = true; 
+
+            for (int j = 0; j < 26; j ++) { //进行比较
+                if (apltemp[j] < alp[j]) { 
                     //cout << alp[j] << "---" << apltemp[j] <<endl;
                     index = false;
                     break;
                 }
             }
-            cout << index << endl;
+            
+            //cout << index << endl;
 
             if (index && (res.size() == 0 || res.size() > words[i].size())) res = words[i];
         }
