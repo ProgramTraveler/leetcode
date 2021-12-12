@@ -13,8 +13,12 @@ public:
         for (auto& ch : s) ch = tolower(ch);
         return s;
         */
-        //方法二，手动实现API，感觉这才是这道题的意义
-
+        //方法二，手动实现API，感觉这才是这道题的意义，就是利用ASCLL
+        for (auto& ch : s) {
+            if (ch >= 65 && ch <= 90) //如果当前的字母是大写字母
+                ch |= 32;
+        }
+        return s;
     }
 };
 // @lc code=end
