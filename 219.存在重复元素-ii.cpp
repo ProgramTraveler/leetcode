@@ -25,5 +25,22 @@ public:
         return false;
     }
 };
+
+//这个是java版本的，利用了Set的特性
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        int index = nums.length; //整个数组长度
+        Set<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < index; i ++) {
+            if (i > k) set.remove(nums[i - k - 1]);
+            
+            if (set.contains(nums[i])) return true;
+
+            set.add(nums[i]);
+        }
+        return false;
+    }
+}
 // @lc code=end
 
