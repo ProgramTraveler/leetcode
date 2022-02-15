@@ -25,7 +25,7 @@ class Solution {
                 col[i] = Math.max(col[i], matrix[j][i]);
             }
         }
-        for (int i = 0; i < m; i ++) {
+        for (int i = 0; i < m; i ++) { //找出符合的数字
             for (int j = 0; j  <n; j ++) {
                 if (matrix[i][j] == row[i] && matrix[i][j] == col[j]) ans.add(matrix[i][j]);
             }
