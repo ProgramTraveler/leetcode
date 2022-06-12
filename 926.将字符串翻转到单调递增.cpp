@@ -20,6 +20,6 @@ public:
         }
         return dp;
     }
-};
+};                                                                                      
 // @lc code=end
 
