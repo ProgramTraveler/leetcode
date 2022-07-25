@@ -13,7 +13,7 @@ public:
         }
 
         return min(accumulate(distance.begin() + start, distance.begin() + destination, 0),
-                   accumulate(distance.begin(), distance.begin() + start, 0) + accumulate(distance.begin() + destination, distance.end(), 0)); //计算顺时针和逆时针的下的不同的距离
+                   accumulate(distance.begin(), distance.begin() + start, 0) + accumulate(distance.begin() + destination, distance.end(), 0)); //计算顺时针和逆时针的下的不同的距离，选最小的
     }
 };
 // @lc code=end
