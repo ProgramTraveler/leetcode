@@ -5,7 +5,8 @@
  */
 
 // @lc code=start
-class Solution 
+
+/*class Solution 
 {
 public:
     int minOperations(vector<string>& logs) 
@@ -25,8 +26,22 @@ public:
         }
         return result;
     }
-};
+};*/
 
+class Solution {
+public:
+    int minOperations(vector<string>& logs) {
+        stack<string> sta;
+
+        for (int i = 0; i < logs.size(); i ++) {
+            if (logs[i] == "../" && !sta.empty()) sta.pop();
+            
+            if (logs[i] != "../" && logs[i] != "./") sta.push(logs[i]);
+        }
+        
+        return sta.size();
+    }
+};
 
 // @lc code=end
 
