@@ -5,7 +5,8 @@
  */
 
 // @lc code=start
-class MyLinkedList {
+
+/* class MyLinkedList {
 public:
     //定义链表节点结构体
     struct LinkedNode {
@@ -13,13 +14,11 @@ public:
         LinkedNode* next;
         LinkedNode(int val) : val(val), next(nullptr) {} 
     };
-    /** Initialize your data structure here. */
     MyLinkedList() {
         dummyHead = new LinkedNode(0); //虚拟头节点
         size = 0;
     }
     
-    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
     int get(int index) {
         if (index > (size - 1) || index < 0) {
             return -1;
@@ -31,7 +30,6 @@ public:
         return cur -> val;
     }
     
-    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
     void addAtHead(int val) {
         LinkedNode* newNode = new LinkedNode(val);
         newNode -> next = dummyHead -> next;
@@ -39,7 +37,6 @@ public:
         size ++;
     }
     
-    /** Append a node of value val to the last element of the linked list. */
     void addAtTail(int val) {
         LinkedNode* newNode = new LinkedNode(val);
         LinkedNode* cur = dummyHead;
@@ -50,7 +47,6 @@ public:
         size ++;
     }
     
-    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
     void addAtIndex(int index, int val) {
         if (index > size)
             return;
@@ -64,7 +60,6 @@ public:
         size ++;
     }
     
-    /** Delete the index-th node in the linked list, if the index is valid. */
     void deleteAtIndex(int index) {
         if (index >= size || index < 0)
             return ;
@@ -80,6 +75,70 @@ public:
 private :
     LinkedNode* dummyHead;
     int size;
+}; */
+
+class MyLinkedList { //主要是 index 和 size 的对应
+private:
+    int size;
+    ListNode *head;
+
+public:
+    MyLinkedList() {
+        this -> size = 0;
+        this -> head = new ListNode(0); //设计一个头节点
+    }
+    
+    int get(int index) {
+        cout << index << " " << size << endl;
+        if (index >= size || index < 0) return -1; //索引无效的话返回-1
+        
+        ListNode* temp = head; //临时节点
+
+        for (int i = 0; i <= index; i ++)  temp = temp -> next;
+
+        return temp -> val;
+    }
+    
+    void addAtHead(int val) {
+       addAtIndex(0, val);
+    }
+    
+    void addAtTail(int val) {
+        addAtIndex(size, val);
+    }
+    
+    void addAtIndex(int index, int val) {
+        if (index > size) return; //不满足要求返回空
+
+        index = max (0, index); //防止输入的负数
+
+        ListNode* node = new ListNode(val);
+
+        ListNode* temp_l = head;
+
+        for (int i = 0; i < index; i ++) temp_l = temp_l -> next;
+
+        node -> next = temp_l -> next;
+        temp_l -> next = node;
+
+        size ++;
+    }
+    
+    void deleteAtIndex(int index) {
+        if (index < 0 || index >= size) return;
+
+        ListNode* temp_l = head;
+
+        for (int i = 0; i < index; i ++) temp_l = temp_l -> next;
+
+        ListNode* p = temp_l -> next;
+
+        temp_l -> next = temp_l -> next -> next;
+        delete p;
+
+        size --;
+
+    }
 };
 
 /**
