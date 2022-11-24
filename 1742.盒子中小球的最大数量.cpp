@@ -12,7 +12,7 @@ public:
 
         unordered_map<int, int> cnt; // 记录每个盒子中有多少小球
 
-        for (int i = lowLimit; i <= highLimit; i ++) { // 很朴素的思想
+        for (int i = lowLimit; i <= highLimit; i ++) { // 很朴素的思想 还以为官方有新活
             int box_num = 0, x = i;
 
             while (x) box_num += x % 10, x /= 10; // 这一步也是平平无奇
