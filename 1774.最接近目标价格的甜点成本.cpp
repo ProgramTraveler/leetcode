@@ -5,6 +5,8 @@
  */
 
 // @lc code=start
+
+/*
 class Solution {
 public:
     int closestCost(vector<int>& baseCosts, vector<int>& toppingCosts, int target) {
@@ -23,6 +25,32 @@ public:
                 min_gap = abs(i - target);
             }
         return ans;
+    }
+};
+*/
+
+class Solution {
+public:
+    void dfs (vector<int>& toppingCosts, int target, int cur, int &res, int p) {
+        if (abs(res - target) < cur -target) return;
+
+        if (abs(res - target) >= abs(cur - target)) {
+            abs(res - target) > abs(cur - target) ? res = cur : res = min(res, cur);
+        }
+
+        if (p == toppingCosts.size()) return;
+
+        dfs(toppingCosts, target, cur + toppingCosts[p] * 2, res, p + 1);
+        dfs(toppingCosts, target, cur + toppingCosts[p], res, p + 1);
+        dfs(toppingCosts, target, cur, res, p + 1);
+    }
+
+    int closestCost(vector<int>& baseCosts, vector<int>& toppingCosts, int target) {
+        int res = baseCosts[0];
+
+        for (auto cur : baseCosts) dfs(toppingCosts, target, cur, res, 0);
+
+        return res;
     }
 };
 // @lc code=end
