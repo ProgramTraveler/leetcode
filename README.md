@@ -38,7 +38,6 @@ public:
 [统计公平数对的数目](https://leetcode.cn/problems/count-the-number-of-fair-pairs/description/)
 
 * 最开始看见这个题的的数据大小我就知道暴力应该是会超时的 所以在循环中加入了一些判断条件 但无奈还是没有 AC 最后还是超时了
-
 * 当时也想到了用排序后的结果来试试 但无奈没有具体思路
 
 ```
@@ -74,5 +73,136 @@ public:
 };
 ```
 
-* 
+* 二分查找
+* 在这个题中关键还是对公式的变形 其中用到的 **lower_bound** 和 **upper_bound**
+* 注意二分的边界
+
+···cpp
+
+···
+
 ---
+
+### 2023-02-18 第 98 场双周赛
+
+[替换一个数字后的最大差值](https://leetcode.cn/problems/maximum-difference-by-remapping-a-digit/)
+
+* 这个最初看题的时候有点懵 但是很快就想到了一个大概的思路
+* 最小的数肯定就是将第一位的数字变成 0 最大的就是将最靠前的数字变成 9 因为第一位数字可能已经是 9 了 所以尽可能选择靠前的数字 这样才是最大的
+
+```cpp
+class Solution {
+public:
+    int minMaxDifference(int num) {
+        stack<int>res_max;
+        
+        stack<int>res_min;
+        
+        int tem = num;
+        
+        int sta_max = 9, sta_min = 0, sta = 0;
+        
+        while (tem) {
+            sta = tem % 10;
+                
+            sta_min = sta;
+            
+            if (sta != 9) sta_max = sta;
+            
+            tem = tem / 10;
+        }
+        
+        tem = num;
+        
+        while (tem) {
+            int tem_n = tem % 10;
+            
+            if (tem_n == sta_max) res_max.push(9);
+            
+            
+            else res_max.push(tem_n);
+            
+            if (tem_n == sta_min) res_min.push(0);
+            
+            else res_min.push(tem_n);
+            
+            tem = tem / 10;
+        }
+        
+        long long res_x = 0, res_i = 0;
+        
+        while (!res_max.empty()) {
+            res_x = res_x * 10 + res_max.top();
+            
+            res_max.pop();
+        }
+        
+        while (!res_min.empty()) {
+            res_i = res_i * 10 + res_min.top();
+            
+            res_min.pop();
+        }
+            
+        return res_x - res_i;
+
+    }
+};
+```
+
+[修改两个元素的最小分数](https://leetcode.cn/problems/minimum-score-by-changing-two-elements/)
+
+* 卡住了 实在是没有思路
+
+```cpp
+class Solution {
+public:
+    int minimizeSum(vector<int>& nums) { 
+        // 两个数的最小值肯定是满足最小值是 0 的情况 在这个条件下的最大值也要尽可能的小
+        
+        if (nums.size() == 3) return 0;
+        
+        int count = 0; // 最大值出现的次数
+        
+        int ans_ma = INT_MIN, ans_mi = 0;
+        
+        for (int i = 1; i < nums.size(); i ++) {
+            int tem = abs(nums[i] - nums[i - 1]);
+            
+            ans_ma = max(ans_ma, tem);
+        }
+        
+        int sta = 0, end = 0;
+        
+        for (int i = 1; i < nums.size(); i ++) {
+            
+            int tem = abs(nums[i] - nums[i - 1]);
+            
+            if (ans_ma == tem) count ++, sta = i - 1, end = i;
+        }
+        
+        if (count > 1) return ans_ma;
+        
+        int sta_fro = INT_MAX, end_beh = INT_MAX;
+        
+        if (sta > 0) sta_fro = nums[sta - 1];
+        
+        if (end < nums.size() - 1) end_beh = nums[end + 1];
+        
+        int num_min = min(sta_fro, end_beh);
+        
+        nums[sta] = num_min, nums[end] = num_min;
+        
+        ans_ma = 0;
+        
+        for (int i = 1; i < nums.size(); i ++) {
+            int tem = abs(nums[i] - nums[i - 1]);
+            
+            ans_ma = max(ans_ma, tem);
+        }
+        
+        return ans_ma;
+        
+        
+    }
+};
+```
