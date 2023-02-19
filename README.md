@@ -75,10 +75,35 @@ public:
 
 * 二分查找
 * 在这个题中关键还是对公式的变形 其中用到的 **lower_bound** 和 **upper_bound**
+* lower_bound 用于查找容器中 **大于等于** 某值的数 返回这个数的指针
+* upper_bound 用于查找容器中 **大于** 某值的数 返回这个数的指针
 * 注意二分的边界
 
 ···cpp
+class Solution {
+public:
+    long long countFairPairs(vector<int>& nums, int lower, int upper) {
+        sort(nums.begin(), nums.end());
 
+        long long res = 0; // 数据挺大的
+
+        for (int i = 0; i < nums.size(); i ++) {
+            int l = lower - nums[i];
+            int r = upper - nums[i];
+
+            int cou_1 = lower_bound(nums.begin(), nums.end(), l) - nums.begin(); // 下标
+
+            int cou_2 = upper_bound(nums.begin(), nums.end(), r) - nums.begin(); // 下标
+
+            // j 的范围是 [cou_1, cou_2) 且 i < j
+            if (cou_1 <= i && cou_2 > i) res += cou_2 - i - 1;
+
+            else if (i < cou_1) res += cou_2 - cou_1;
+        }
+
+        return res;
+    }
+};
 ···
 
 ---
@@ -206,3 +231,20 @@ public:
     }
 };
 ```
+
+* 大为震惊
+
+```cpp
+class Solution {
+public:
+    int minimizeSum(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+
+        int n = nums.size();
+
+        return min({nums[n - 3] - nums[0], nums[n - 2] - nums[1], nums[n - 1] - nums[2]});
+    }
+};
+```
+
+---
