@@ -79,32 +79,33 @@ public:
 * upper_bound 用于查找容器中 **大于** 某值的数 返回这个数的指针
 * 注意二分的边界
 
-···cpp
+```cpp
 class Solution {
 public:
     long long countFairPairs(vector<int>& nums, int lower, int upper) {
         sort(nums.begin(), nums.end());
 
         long long res = 0; // 数据挺大的
-
+    
         for (int i = 0; i < nums.size(); i ++) {
             int l = lower - nums[i];
             int r = upper - nums[i];
-
+    
             int cou_1 = lower_bound(nums.begin(), nums.end(), l) - nums.begin(); // 下标
-
+    
             int cou_2 = upper_bound(nums.begin(), nums.end(), r) - nums.begin(); // 下标
 
             // j 的范围是 [cou_1, cou_2) 且 i < j
             if (cou_1 <= i && cou_2 > i) res += cou_2 - i - 1;
-
+    
             else if (i < cou_1) res += cou_2 - cou_1;
         }
-
+    
         return res;
     }
 };
-···
+
+```
 
 ---
 
@@ -248,3 +249,192 @@ public:
 ```
 
 ---
+
+### 2023-02-19 第 333 场周赛
+
+[合并两个二维数组](https://leetcode.cn/problems/merge-two-2d-arrays-by-summing-values/)
+
+* 第一题直接 A
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2) {
+        vector<vector<int>> res;
+        
+        unordered_map<int, int> al;
+        
+        for (int i = 0; i < nums1.size();i ++) al[nums1[i][0]] += nums1[i][1];
+        
+        for (int i = 0; i < nums2.size(); i ++) al[nums2[i][0]] += nums2[i][1];
+        
+        for (auto [k, v] : al) {
+            //cout << k << " " << v << endl;
+            res.push_back({k, v});
+        }
+            
+        sort(res.begin(), res.end());
+        
+        return res;
+    }
+};
+```
+
+[将整数减少到零需要的最少操作数](https://leetcode.cn/problems/minimum-operations-to-reduce-an-integer-to-0/)
+
+* 贪心 难得将第二题 A 出来
+
+```cpp
+class Solution {
+public:
+    bool fun(int n) { // 检查是不是 2 的某个次幂
+        while (n) {
+            if (n != 1 && n % 2 != 0) return false; // 有奇数 说明不是 2 的某个次幂
+            
+            n /= 2;
+        }
+        
+        return true;
+    }
+    
+    /*int cout(int n) { // 变成 2 的 某个次幂需要的步数 前提是偶数
+        int ans = 0;
+        while ()
+    }*/
+    
+    void count(vector<int>& res, int n) {
+        int l = 1, r = 1;
+        
+        if (fun(n)) {
+            //cout << n << ' ' << " end " << endl;
+            res.push_back(n);
+            
+            return ;
+        }
+        
+        while (r < n) r *= 2;
+        
+        l = r / 2;
+        
+        //cout << l << ' ' << r << endl;
+        
+        if ((n - l) > (r - n)) res.push_back(r), count(res, r - n);
+        
+        else res.push_back(l), count(res, n - l);
+    }
+    
+    int minOperations(int n) { // 应该是贪心 构造 2 的某个幂的最少次数
+        
+        vector<int> res;
+        
+        count(res, n);
+        
+        //for (int i = 0; i < res.size(); i ++) cout << res[i] << ' ';
+        
+        //cout << endl;
+        
+        
+        return res.size();
+        
+    }
+};
+```
+
+[无平方子集计数](https://leetcode.cn/problems/count-the-number-of-square-free-subsets/description/)
+
+* 本来以为能 A 的 没想到还是出错了
+
+```cpp
+class Solution {
+public:
+    bool fun(int n) {
+        
+        cout << "in: " << n << endl;
+        
+        //if (n < 4) return true;
+        
+        int idx = 2, mi = 2;
+        
+        while (mi < n) {
+            
+            mi = idx * idx;
+            
+            if (n % mi == 0) return false;
+            
+            idx ++;
+        }
+        
+        return true;
+    }
+    
+    int squareFreeSubsets(vector<int>& nums) { // 首先应该是找出 无平方因子数
+        /*unordered_map<int, bool> al;
+    
+        
+        for (int i = 0; i < nums.size(); i ++) {
+            al[nums[i]] = fun(nums[i]);
+        }*/
+        
+        
+        /*int l = 0, r = 0;
+        
+        
+        
+        int ans = 0;
+        
+        for (int i = 0; i < res.size(); i ++) cout << res[i] << " ";
+        
+        cout << endl;
+        
+        for (int i = 0; i < nums.size(); i ++) {
+            int tem = nums[i];
+            int cou = 1;
+            
+            while (tem) {
+                cou *= tem;
+                
+                tem -= 1;
+            }
+            
+            ans += cou;
+        }
+        
+        return ans;*/
+        
+        vector<int> res;
+        
+        for (int i = 0; i < nums.size(); i ++) if (fun(nums[i])) res.push_back(nums[i]);
+        
+        for (int i = 0; i < res.size(); i ++) cout << res[i] << ' ';
+        
+        cout << endl;
+        
+        // 排列组合 ？ 按正常的数学方式求
+        
+        int n = res.size();
+        
+        int ans = 0;
+        
+        ans += n; // 1 个 和 全组合的情况
+        
+        if (n > 1) ans += 1;
+        
+        int idx_1 = 1;
+        
+        int tem = n;
+        
+        while (tem) idx_1 *= tem, tem -= 1;
+        
+        for (int i = 2; i < n; i ++) {
+            int temp = i, idx_2 = 1;
+            
+            while (temp) idx_2 *= temp, temp -= 1;
+            
+            ans += idx_1 / idx_2;
+        }
+        
+        return ans;
+        
+    }
+};
+```
