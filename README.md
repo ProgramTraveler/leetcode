@@ -233,7 +233,9 @@ public:
 };
 ```
 
-* 大为震惊
+* 大为震惊 脑经急转弯
+
+* 具体思路可以看[传送门](https://www.bilibili.com/video/BV15D4y1G7ms/?spm_id_from=333.337.search-card.all.click&vd_source=c68460d92fb2b166884357ad8c98de03)
 
 ```cpp
 class Solution {
