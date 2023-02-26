@@ -475,4 +475,85 @@ public:
 };
 ```
 
-[]()
+[找出字符串的可整除数组](https://leetcode.cn/problems/find-the-divisibility-array-of-a-string/description/)
+
+* 这个题主要是处理数据溢出的问题 花费的时间比较多 而且罚了 4 次时
+* 最开始是直接模拟的 然后 int 溢出 改成 long long 后数据还是溢出 最后对数据的处理进行优化 但时间超时 最后才想到这个思路
+* 其实思路也不难想 就是对数据的溢出缺点想法
+
+```cpp
+class Solution {
+public:
+    vector<int> divisibilityArray(string word, int m) { // 数据溢出 所以想模拟除法
+        /*vector<int> res;
+        
+        vector<int> tem;
+        
+        long long f = 0, idx = 0; // 记录下标 被除数
+        
+        // 处理下标位置
+        int w = m;
+        
+        while (w / 10) {
+            w = w % 10;
+            
+            
+            //w = w / 10;
+            
+            f ++;
+        }
+        
+        f = f + 2 - 1 - 1;
+        
+        cout << "f: " << f << endl;
+        
+        for (int i = 0; i < f; i ++) tem.push_back(word[i] - '0'), res.push_back(0);
+        
+        for (int i = f; i < word.size(); i ++) {
+            
+            tem.push_back(word[i] - '0');
+            
+            idx = 0;
+            
+            // 模拟除法
+            while (f < tem.size()) {
+                idx = idx * 10 + tem[f]; // 被除数
+                
+                idx = idx % m;
+                
+                f ++;
+                
+            }
+            
+            if (idx == 0) res.push_back(1);
+            
+            else res.push_back(0);
+        }*/
+        vector<int> res;
+        
+        vector<int> tem;
+        
+        long long f = 0, idx = 0; // 记录下标 被除数
+        
+        for (int i = 0; i < word.size(); i ++) {
+            idx = idx * 10 + (word[i] - '0');
+                
+            idx = idx % m;
+            
+            if (idx == 0) res.push_back(1);
+            
+            else res.push_back(0);
+        }
+        
+        return res;
+    }
+};
+```
+
+[求出最多标记下标](https://leetcode.cn/problems/find-the-maximum-number-of-marked-indices/)
+
+```cpp
+
+```
+
+---
