@@ -552,8 +552,38 @@ public:
 
 [求出最多标记下标](https://leetcode.cn/problems/find-the-maximum-number-of-marked-indices/)
 
-```cpp
+* 初次 A 到第三题 感觉应该可以上 1500
+* luck day
+* 正常处理就行 排序加贪心
 
+```cpp
+class Solution {
+public:
+    int maxNumOfMarkedIndices(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        
+        vector<int> sma, big;
+        
+        int idx = nums.size() / 2;
+        
+        for (int i = 0; i < idx; i ++) sma.push_back(nums[i] * 2);
+        
+        for (int i = idx; i < nums.size(); i ++) big.push_back(nums[i]);
+        
+        int l = 0, r = 0;
+        
+        int res = 0;
+        
+        while (l < sma.size() && r < big.size()) {
+            
+            if (sma[l] <= big[r]) l ++, r ++, res ++;
+            
+            else r ++;
+        }
+        
+        return res * 2;
+    }
+};
 ```
 
 ---
