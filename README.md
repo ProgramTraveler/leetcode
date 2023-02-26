@@ -440,3 +440,39 @@ public:
     }
 };
 ```
+
+---
+
+### 2023-02-26 第 334 场周赛
+
+[左右元素和的差值](https://leetcode.cn/problems/left-and-right-sum-differences/description/)
+
+* 第一题依旧是水题 直接按题目意思就能 A
+
+```cpp
+class Solution {
+public:
+    vector<int> leftRigthDifference(vector<int>& nums) {
+        vector<int> res;
+        
+        for (int i = 0; i < nums.size(); i ++) {
+            int l = 0, r = 0;
+            
+            int k = i - 1, j = i + 1;
+            
+            while (k >= 0) l += nums[k], k --;
+            
+            while (j < nums.size()) r += nums[j], j ++;
+            //for (int k = i - 1; i >= 0; i --) l += nums[k];
+            
+            //for (int j = i + 1; i < nums.size(); i ++) r += nums[j];
+            
+            res.push_back(abs(l - r));
+        }
+        
+        return res;
+    }
+};
+```
+
+[]()
