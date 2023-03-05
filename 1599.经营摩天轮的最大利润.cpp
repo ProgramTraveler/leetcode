@@ -28,7 +28,68 @@ public:
         
         return ans;
     }
+};
 
+// 第二次 AC
+class Solution {
+public:
+    int minOperationsMaxProfit(vector<int>& customers, int boardingCost, int runningCost) {
+        // 贪心 每次都上 4 个人
+
+        int wait = 0; // 正在等待的人数
+
+        int mon = 0, idx = 0; // 赚的钱 摩天轮旋转的次数
+
+        int res = -1;
+
+        // 最后等待的乘客数量为 0 
+        for (auto n : customers) {
+            idx ++;
+
+            if (n != 0) {
+                wait = n;
+
+                break;
+            }
+        }
+
+        int cus = 0; // 摩天轮里总的乘客数量
+
+        while (wait || idx < customers.size()) {
+
+            if (wait > 4) cus += 4, wait -= 4;
+
+            else cus += wait, wait -= wait;
+
+            int po = cus * boardingCost - idx * runningCost;
+
+            if (po > mon) res = idx, mon = po;
+
+            //cout << po << ' ' << mon << ' ' << idx << endl;
+
+            if (idx < customers.size()) wait += customers[idx];
+
+            idx ++; // 摩天轮转一次
+
+        }
+
+        /*for (auto n : customers) {
+            wait += n; // 还未启动时等待的人数
+
+            int cus = 0; // 每次的乘客数量
+
+            if (wait > 4) cus = 4 ,wait -= 4;
+
+            else cus = wait, wait -= wait;
+
+            mon += cus * boardingCost - runningCost;
+
+            
+        }*/
+
+        return res;
+
+    }
 };
 // @lc code=end
 
