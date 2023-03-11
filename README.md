@@ -1,4 +1,4 @@
-## LeetCode的日常刷题记录
+## LeetCode的周赛记录
 
 ### 2023-02-12 第 332 场周赛
 
@@ -582,6 +582,189 @@ public:
         }
         
         return res * 2;
+    }
+};
+```
+
+---
+
+### 2023-03-05 第 335 场周赛
+
+* 这次周赛其实挺简单的 我感觉能做但是实际效果却不是很理想
+
+[递枕头](https://leetcode.cn/problems/pass-the-pillow/)
+
+* 第一题没有一次 A 掉
+* 失误了 本来想整波花活 结果整出事了
+* 罚时一次
+
+```cpp
+class Solution {
+public:
+    int passThePillow(int n, int time) {
+        /*int idx_1 = time / n;
+        
+        int idx_2 = time % n;
+        
+        int res = 0;
+        
+        if (idx_1 % 2 == 0) {
+            res = 1 + idx_2;
+        } else {
+            res = n - idx_2 - 1;
+        }
+        
+        return res;*/
+        
+        int res = 1, f = false;
+        
+        while (time) {
+            if (res == n) f = true;
+            
+            if (res == 1) f = false;
+            
+            if (f) res --, time --;
+            
+            else res ++, time --;
+         }
+        
+        return res;
+    }
+};
+```
+
+[二叉树中的第K大层数和](https://leetcode.cn/problems/kth-largest-sum-in-a-binary-tree/)
+
+* 第二题花费了太多的时间
+* 题型是见过的
+* 陷入了怎么判断树的节点具体是哪一层的瓶颈
+* 最后也没有 A 掉...
+
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    long long kthLargestLevelSum(TreeNode* root, int k) {
+        vector<long> st(1e5 + 10, 0);
+        
+        int res = 0, idx = 0;
+    
+        queue<TreeNode*> qu;
+        
+        qu.push(root);
+        
+        idx = 0;
+        
+        st[idx] = (qu.front() -> val), idx ++;
+        
+        while (!qu.empty()) {
+            
+            if (qu.front() -> left != nullptr) qu.push(qu.front() -> left), st[idx] = (qu.front() -> left -> val), idx ++;
+            
+            else idx ++;
+            
+            
+            if (qu.front() -> right != nullptr) qu.push(qu.front() -> right), st[idx] = (qu.front() -> right ->val), idx ++;
+            else idx ++;
+            
+            
+            qu.pop();
+            
+        }
+        
+        //for (int i = 0; i < 6; i ++) cout << st[i] << endl;
+        
+        vector<long> ans;
+        
+        ans.push_back(st[0]);
+        
+        int l = 0 * 2 + 1, r = 0 * 2 + 2;
+        
+        res = st[0];
+        
+        while (res != 0) {
+            res = 0;
+            
+            int tem_l = l, tem_r = r;
+            
+            while (l <= r) {
+                res += st[l];
+                
+                l ++;
+            }
+            
+            ans.push_back(res);
+            
+            l = tem_l * 2 + 1;
+            r = tem_r * 2 + 2;
+        }
+        
+        
+        sort(ans.begin(), ans.end());
+        
+        int c = ans.size() - 1;
+        
+        while (k --) {
+            res = ans[c];
+            
+            c --;
+        }
+        
+        return res;
+    }
+};
+```
+
+[分割数组使乘积互质](https://leetcode.cn/problems/split-the-array-to-make-coprime-products/)
+
+* 这题看第一眼感觉不难
+* 但是第二题花的时间有点多 没时间做优化
+* 最后是数字溢出了 应该还是大数的问题
+
+```cpp
+class Solution {
+public:
+    int findValidSplit(vector<int>& nums) {
+        int n = nums.size() - 2;
+        
+        int l = 0, r = 0;
+        
+        int res = -1;
+        
+        long long s = 1;
+        
+        for (int i = 0; i < nums.size(); i ++) s *= nums[i];
+        
+        while (l <= n) {
+            long long tem_1 = 1, tem_2 = 1;
+            
+            for (int i = 0; i <= l; i ++) tem_1 *= nums[i];
+            
+            tem_2 = s / tem_1;
+            
+            cout << tem_1 << ' ' << tem_2 << endl;
+            
+            if (gcd(tem_1, tem_2) == 1) {
+                res = l; 
+                break;
+            }
+            
+            //cout << gcd(tem_1, tem_2) << endl;
+            
+            l ++;
+        }
+        
+        return res;
     }
 };
 ```
