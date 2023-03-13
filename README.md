@@ -723,6 +723,63 @@ public:
         return res;
     }
 };
+
+* 使用 BFS 来解决这样的问题
+* 双数组
+* 这样的题应该是第二次遇到了 下次不会再出错了
+
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    long long kthLargestLevelSum(TreeNode* root, int k) {
+        vector<TreeNode*> q;
+
+        vector<long long> sum;
+
+        q.push_back(root);
+
+        // q.clear();
+
+        //cout << q.size() << endl;
+
+        while (q.size() > 0) {
+            vector<TreeNode*> tem;
+
+            long long s = 0;
+
+            tem = q, q.clear();
+
+            for (auto node : tem) {
+                s += node -> val;
+
+                if (node -> left) q.push_back(node -> left);
+
+                if (node -> right) q.push_back(node -> right);
+            }
+
+            sum.push_back(s);
+        }
+
+        sort(sum.begin(), sum.end());
+
+        int n = sum.size();
+
+        return n < k ? -1 : sum[n - k];
+    }
+};
+```
+
 ```
 
 [分割数组使乘积互质](https://leetcode.cn/problems/split-the-array-to-make-coprime-products/)
