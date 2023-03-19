@@ -868,3 +868,151 @@ public:
 ```
 
 ---
+
+### 2023-03-19 第 337 场周赛
+
+[奇偶位数](https://leetcode.cn/problems/number-of-even-and-odd-bits/)
+
+* 第一题直接模拟 A
+
+```cpp
+class Solution {
+public:
+    vector<int> evenOddBit(int n) {
+        vector<int> res;
+        
+        int even = 0, odd = 0;
+        
+        vector<int> tem;
+        
+        while (n) {
+            tem.push_back(n % 2);
+            
+            n /= 2;
+        }
+        
+        for (int i = 0; i < tem.size(); i ++) {
+            if (i % 2 == 0 && tem[i] == 1) odd ++;
+            
+            if (i % 2 != 0 && tem[i] == 1) even ++;
+        }
+        
+        //reverse(tem.begin(), tem.end());
+        
+        res.push_back(odd);
+        res.push_back(even);
+        
+        return res;
+    }
+};
+```
+
+[检查骑士巡视方案](https://leetcode.cn/problems/check-knight-tour-configuration/)
+
+* 这道题也简单
+* 很容易就想到思路
+* 但最后被题目 每次从左上角开始检查 坑了一次罚时
+
+```cpp
+class Solution {
+public:
+    bool checkValidGrid(vector<vector<int>>& grid) {
+        unordered_map<int, int> al_row; // 记录数字的行数
+        unordered_map<int, int> al_col; // 记录数字的列数
+        
+        for (int i = 0; i < grid.size(); i ++) {
+            for (int j = 0; j < grid[i].size(); j ++) {
+                int tem = grid[i][j];
+                
+                al_row[tem] = i;
+                al_col[tem] = j;
+            }
+        }
+        
+        int n = grid.size();
+        
+        int idx_row = al_row[0];
+        int idx_col = al_col[0];
+        
+        if (idx_row != 0 || idx_col != 0) return false;
+        
+        for (int i = 1; i < n * n; i ++) {
+            int tem_row = al_row[i], tem_col = al_col[i];
+            
+            bool f1 = ((idx_row - 2) == tem_row && (idx_col - 1) == tem_col);
+            bool f2 = ((idx_row - 2) == tem_row && (idx_col + 1) == tem_col);
+            bool f3 = ((idx_row - 1) == tem_row && (idx_col - 2) == tem_col);
+            bool f4 = ((idx_row - 1) == tem_row && (idx_col + 2) == tem_col);
+            bool f5 = ((idx_row + 1) == tem_row && (idx_col - 2) == tem_col);
+            bool f6 = ((idx_row + 1) == tem_row && (idx_col + 2) == tem_col);
+            bool f7 = ((idx_row + 2) == tem_row && (idx_col - 1) == tem_col);
+            bool f8 = ((idx_row + 2) == tem_row && (idx_col + 1) == tem_col);
+            
+            if (f1 || f2 || f3 || f4 || f5 || f6 || f7 || f8) {
+                idx_col = tem_col, idx_row = tem_row;
+            } else {
+                return false;
+            }
+        }
+        
+        return true;
+        
+    }
+};
+```
+
+[美丽子集的数目](https://leetcode.cn/problems/the-number-of-beautiful-subsets/description/)
+
+* 对子集题目的敏感度还是不够
+* 看完想了想没有什么具体思路
+
+```cpp
+
+```
+
+[执行操作后的最大MEX](https://leetcode.cn/problems/smallest-missing-non-negative-integer-after-operations/)
+
+* 这道题测试数据过了一半多
+* 贪心的想法应该是没错的
+* 但是思路有漏洞
+
+```cpp
+class Solution {
+public:
+    int findSmallestInteger(vector<int>& nums, int value) {
+        sort(nums.begin(), nums.end());
+        
+        unordered_map<int, bool> cnt;
+        
+        for (int i = 0; i < nums.size(); i ++) {
+            while (nums[i] < 0) nums[i] += value;
+        }
+        
+        sort(nums.begin(), nums.end());
+        
+        for (int i = 0; i < nums.size(); i ++) cnt[nums[i]] = 1;
+        
+        for (int i = nums.size() - 1; i >= 0; i --) {
+            int tem_mod = nums[i] % value;
+            
+            int tem = nums[i] / value;
+            
+            if (tem <= 0) break;
+            
+            if (!cnt[tem_mod]) cnt[tem_mod] = 1, cnt[nums[i]] = -1;
+        }
+        
+        int res = 0;
+        
+        for(int i = 0; i < cnt.size(); i ++) {
+            if (!cnt[i]) {
+                res = i;
+                
+                break;
+            }
+        }
+        
+        return res;
+    }
+};
+```
