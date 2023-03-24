@@ -965,9 +965,43 @@ public:
 
 * 对子集题目的敏感度还是不够
 * 看完想了想没有什么具体思路
+* 子集型回溯
 
 ```cpp
+class Solution {
+public:
+    int beautifulSubsets(vector<int>& nums, int k) {
+        // 子集型回溯
+        // 这种求子集的问题还是做的太少了
 
+        int cnt[30001]{};
+
+        int res = -1; // 去掉空集
+
+        function<void(int)> dfs=[&](int i) {
+            if (i == nums.size()) {
+                res ++;
+                return ;
+            }
+
+            // 不选
+            dfs(i + 1);
+
+            // 选
+            int x = nums[i] + k; // 避免出现负数下标
+
+            if (cnt[x - k] == 0 && cnt[x + k] == 0) {
+                cnt[x] ++;
+                dfs(i + 1);
+                cnt[x] --;
+            }
+        };
+
+        dfs(0);
+
+        return res;
+    }
+};
 ```
 
 [执行操作后的最大MEX](https://leetcode.cn/problems/smallest-missing-non-negative-integer-after-operations/)
