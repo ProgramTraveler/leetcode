@@ -2,7 +2,7 @@
 
 ### 2023-02-12 第 332 场周赛
 
-[找出数组的串联值](https://leetcode.cn/problems/find-the-array-concatenation-value/)
+#### [找出数组的串联值](https://leetcode.cn/problems/find-the-array-concatenation-value/)
 
 * 第一题没什么可说的 直接模拟就能 AC
 
@@ -35,7 +35,7 @@ public:
 };
 ```
 
-[统计公平数对的数目](https://leetcode.cn/problems/count-the-number-of-fair-pairs/description/)
+#### [统计公平数对的数目](https://leetcode.cn/problems/count-the-number-of-fair-pairs/description/)
 
 * 最开始看见这个题的的数据大小我就知道暴力应该是会超时的 所以在循环中加入了一些判断条件 但无奈还是没有 AC 最后还是超时了
 * 当时也想到了用排序后的结果来试试 但无奈没有具体思路
@@ -111,7 +111,7 @@ public:
 
 ### 2023-02-18 第 98 场双周赛
 
-[替换一个数字后的最大差值](https://leetcode.cn/problems/maximum-difference-by-remapping-a-digit/)
+#### [替换一个数字后的最大差值](https://leetcode.cn/problems/maximum-difference-by-remapping-a-digit/)
 
 * 这个最初看题的时候有点懵 但是很快就想到了一个大概的思路
 * 最小的数肯定就是将第一位的数字变成 0 最大的就是将最靠前的数字变成 9 因为第一位数字可能已经是 9 了 所以尽可能选择靠前的数字 这样才是最大的
@@ -175,7 +175,7 @@ public:
 };
 ```
 
-[修改两个元素的最小分数](https://leetcode.cn/problems/minimum-score-by-changing-two-elements/)
+#### [修改两个元素的最小分数](https://leetcode.cn/problems/minimum-score-by-changing-two-elements/)
 
 * 卡住了 实在是没有思路
 
@@ -254,7 +254,7 @@ public:
 
 ### 2023-02-19 第 333 场周赛
 
-[合并两个二维数组](https://leetcode.cn/problems/merge-two-2d-arrays-by-summing-values/)
+#### [合并两个二维数组](https://leetcode.cn/problems/merge-two-2d-arrays-by-summing-values/)
 
 * 第一题直接 A
 
@@ -282,7 +282,7 @@ public:
 };
 ```
 
-[将整数减少到零需要的最少操作数](https://leetcode.cn/problems/minimum-operations-to-reduce-an-integer-to-0/)
+#### [将整数减少到零需要的最少操作数](https://leetcode.cn/problems/minimum-operations-to-reduce-an-integer-to-0/)
 
 * 贪心 难得将第二题 A 出来
 
@@ -342,7 +342,7 @@ public:
 };
 ```
 
-[无平方子集计数](https://leetcode.cn/problems/count-the-number-of-square-free-subsets/description/)
+#### [无平方子集计数](https://leetcode.cn/problems/count-the-number-of-square-free-subsets/description/)
 
 * 本来以为能 A 的 没想到还是出错了
 
@@ -445,7 +445,7 @@ public:
 
 ### 2023-02-26 第 334 场周赛
 
-[左右元素和的差值](https://leetcode.cn/problems/left-and-right-sum-differences/description/)
+#### [左右元素和的差值](https://leetcode.cn/problems/left-and-right-sum-differences/description/)
 
 * 第一题依旧是水题 直接按题目意思就能 A
 
@@ -475,7 +475,7 @@ public:
 };
 ```
 
-[找出字符串的可整除数组](https://leetcode.cn/problems/find-the-divisibility-array-of-a-string/description/)
+#### [找出字符串的可整除数组](https://leetcode.cn/problems/find-the-divisibility-array-of-a-string/description/)
 
 * 这个题主要是处理数据溢出的问题 花费的时间比较多 而且罚了 4 次时
 * 最开始是直接模拟的 然后 int 溢出 改成 long long 后数据还是溢出 最后对数据的处理进行优化 但时间超时 最后才想到这个思路
@@ -550,7 +550,7 @@ public:
 };
 ```
 
-[求出最多标记下标](https://leetcode.cn/problems/find-the-maximum-number-of-marked-indices/)
+#### [求出最多标记下标](https://leetcode.cn/problems/find-the-maximum-number-of-marked-indices/)
 
 * 初次 A 到第三题 感觉应该可以上 1500
 * luck day
@@ -592,7 +592,7 @@ public:
 
 * 这次周赛其实挺简单的 我感觉能做但是实际效果却不是很理想
 
-[递枕头](https://leetcode.cn/problems/pass-the-pillow/)
+#### [递枕头](https://leetcode.cn/problems/pass-the-pillow/)
 
 * 第一题没有一次 A 掉
 * 失误了 本来想整波花活 结果整出事了
@@ -633,7 +633,7 @@ public:
 };
 ```
 
-[二叉树中的第K大层数和](https://leetcode.cn/problems/kth-largest-sum-in-a-binary-tree/)
+#### [二叉树中的第K大层数和](https://leetcode.cn/problems/kth-largest-sum-in-a-binary-tree/)
 
 * 第二题花费了太多的时间
 * 题型是见过的
@@ -781,7 +781,7 @@ public:
 };
 ```
 
-[分割数组使乘积互质](https://leetcode.cn/problems/split-the-array-to-make-coprime-products/)
+#### [分割数组使乘积互质](https://leetcode.cn/problems/split-the-array-to-make-coprime-products/)
 
 * 这题看第一眼感觉不难
 * 但是第二题花的时间有点多 没时间做优化
@@ -871,7 +871,7 @@ public:
 
 ### 2023-03-19 第 337 场周赛
 
-[奇偶位数](https://leetcode.cn/problems/number-of-even-and-odd-bits/)
+#### [奇偶位数](https://leetcode.cn/problems/number-of-even-and-odd-bits/)
 
 * 第一题直接模拟 A
 
@@ -907,7 +907,7 @@ public:
 };
 ```
 
-[检查骑士巡视方案](https://leetcode.cn/problems/check-knight-tour-configuration/)
+#### [检查骑士巡视方案](https://leetcode.cn/problems/check-knight-tour-configuration/)
 
 * 这道题也简单
 * 很容易就想到思路
@@ -961,7 +961,7 @@ public:
 };
 ```
 
-[美丽子集的数目](https://leetcode.cn/problems/the-number-of-beautiful-subsets/description/)
+#### [美丽子集的数目](https://leetcode.cn/problems/the-number-of-beautiful-subsets/description/)
 
 * 对子集题目的敏感度还是不够
 * 看完想了想没有什么具体思路
@@ -1004,7 +1004,7 @@ public:
 };
 ```
 
-[执行操作后的最大MEX](https://leetcode.cn/problems/smallest-missing-non-negative-integer-after-operations/)
+#### [执行操作后的最大MEX](https://leetcode.cn/problems/smallest-missing-non-negative-integer-after-operations/)
 
 * 这道题测试数据过了一半多
 * 贪心的想法应该是没错的
@@ -1046,6 +1046,32 @@ public:
             }
         }
         
+        return res;
+    }
+};
+```
+
+* 没想到这么简单
+* 之前的大致的思路是对的 做取模运算 但是还是走偏了
+
+```cpp
+class Solution {
+public:
+    int findSmallestInteger(vector<int>& nums, int value) {
+        unordered_map<int, int> cnt;
+
+        for (int i = 0; i < nums.size(); i ++) {
+            cnt[(nums[i] % value + value) % value] ++; // 取模的通用写法 可以避免 -4 % 5 = -4 这样的情况
+        }
+
+        int res = 0;
+
+        while (cnt[res % value]) {
+            cnt[res % value] --;
+
+            res ++;
+        }
+
         return res;
     }
 };
