@@ -1076,4 +1076,206 @@ public:
     }
 };
 ```
+
+### 2023-03-26 第 338场周赛
+
+#### [k件物品的最大和](https://leetcode.cn/problems/k-items-with-the-maximum-sum/description/)
+
+* 第一题送分题
+
+```cpp
+class Solution {
+public:
+    int kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes, int k) {
+        int res = 0;
+        
+        vector<int> cnt;
+        
+        for (int i = 0; i < numOnes; i ++) cnt.push_back(1);
+        
+        for (int i = 0; i < numZeros; i ++) cnt.push_back(0);
+        
+        for (int i = 0; i < numNegOnes; i ++) cnt.push_back(-1);
+        
+        for (int i = 0; i < k; i ++) res += cnt[i];
+        
+        return res;
+        
+    }
+};
+```
+
+---
+
+#### (质数减法运算)[https://leetcode.cn/problems/prime-subtraction-operation/description/]
+
+* 这个题还行
+* 主要是找质数 浪费了挺长的时间
+
+```cpp
+class Solution {
+public:
+    bool primeSubOperation(vector<int>& nums) {
+        // 寻找质数？
+        // 每个元素都严格大于前一个元素
+        
+        vector<int> pri;
+        
+        for (int i = 2; i <= 1000; i ++) {
+            bool is = true;
+            
+            for (int j = 2; j < i; j ++) {
+                if (i % j == 0) {
+                    is = false;
+                    
+                    break;
+                }
+            }
+            
+            if (is) {
+                pri.push_back(i);
+            }
+        }
+        
+        // cout << "pri: " << pri.size() << endl;
+        
+        int r = nums.size() - 1;
+        
+        while (r > 0 && nums[r] > nums[r - 1]) r --;
+        
+        if (r == 0) return true; // 说明是一个严格递增数组
+        
+        int l = r - 1; // 比当前 r 位置 大的数字
+        
+        while (l >= 0) {
+            int idx = 0;
+            int tem_l = nums[l], tem_r = nums[r];
+            
+            while (tem_l >= tem_r && idx < pri.size()) {
+                tem_l = nums[l];
+                
+                if (tem_l <= pri[idx]) break;
+                
+                tem_l -= pri[idx];
+                
+                idx ++;
+            }
+            nums[l] = tem_l;
+            
+            l --, r --;
+        }
+        
+        // for (int i = 0; i < nums.size(); i ++) cout << nums[i] << " ";
+        
+        // cout << endl;
+        
+        for (int i = 1; i < nums.size(); i ++) {
+            if (nums[i - 1] >= nums[i]) return false;
+        }
+        
+        return true;
+    }
+};
+```
+
+#### (使数组元素全部相等的最少操作次数)[https://leetcode.cn/problems/minimum-operations-to-make-all-array-elements-equal/]
+
+* 这道题我感觉是可以 A 的
+* 常规写法超时
+* 思路就是前缀和加二分
+* `lower_bound`和`upper_bound`的使用技巧
+
+```cpp
+class Solution {
+public:
+    vector<long long> minOperations(vector<int>& nums, vector<int>& queries) {
+        vector<long long> res;
+        
+        sort(nums.begin(), nums.end());
+        
+        long long n = nums.size();
+        
+        long long sum = 0;
+        
+        // for (long long i = 0; i < nums.size(); i ++) sum += nums[i];
+        
+        // 前缀加二分
+        
+        vector<long long> f;
+        
+        f.push_back(0);
+        
+        for (long long i = 0; i < nums.size(); i ++) f.push_back(f[i] + nums[i]);
+        long long idx = f.size() - 1;
+        
+        
+        for (int i = 0; i < queries.size(); i ++) {
+            long long cnt_small = 0, cnt_great = 0;
+            
+            long long sum_small = 0, sum_great = 0;
+            
+            // long long l = 0;
+            
+            long long l = 0, r = n - 1;
+            
+            
+            while (l < r) {
+                
+                long long mid = l + (r - l) / 2;
+            
+                if (nums[mid] > queries[i] ) r = mid - 1;
+                
+                else /*if (nums[mid] < queries[i])*/ l = mid + 1;
+            }
+            // cout << l << endl;
+            
+            if (l == 0) cnt_great = n, sum_great = f[idx];
+            
+            else if (l == n - 1) cnt_small = n, sum_small = f[idx];
+            
+            else {
+                cnt_small = l, sum_small = f[l];
+                cnt_great = n - cnt_small, sum_great = f[idx] - sum_small;
+            }
+            
+            long long ans = (queries[i] * cnt_small - sum_small) + (sum_great - queries[i] * cnt_great);
+            
+            res.push_back(ans);
+            
+            
+//             for (; l < nums.size(); l ++) {
+//                 if (nums[l] < queries[i]) {
+                    
+//                     cnt_small ++;
+                    
+//                     sum_small += nums[l];
+//                 } else {
+//                     break;
+//                 }
+//             }
+            
+            /*while (l < nums.size()) {
+                cnt_great ++;
+                
+                sum_great += nums[l];
+                
+                l ++;
+            }*/
+            
+            //cout << cnt_small << ' ' << sum_small << ' ' << cnt_great << ' ' << sum_great << endl;
+            
+            /*cnt_great = n - cnt_small;
+            sum_great = sum - sum_small;
+            
+            
+            long long ans = (queries[i] * cnt_small - sum_small) + (sum_great - queries[i] * cnt_great);
+            
+            res.push_back(ans);*/
+        }
+        
+        return res;
+    }
+};
+```
+
 # lwoer_bound
