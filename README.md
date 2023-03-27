@@ -1107,7 +1107,7 @@ public:
 
 ---
 
-#### (质数减法运算)[https://leetcode.cn/problems/prime-subtraction-operation/description/]
+#### [质数减法运算](https://leetcode.cn/problems/prime-subtraction-operation/description/)
 
 * 这个题还行
 * 主要是找质数 浪费了挺长的时间
@@ -1178,7 +1178,7 @@ public:
 };
 ```
 
-#### (使数组元素全部相等的最少操作次数)[https://leetcode.cn/problems/minimum-operations-to-make-all-array-elements-equal/]
+#### [使数组元素全部相等的最少操作次数](https://leetcode.cn/problems/minimum-operations-to-make-all-array-elements-equal/)
 
 * 这道题我感觉是可以 A 的
 * 常规写法超时
