@@ -1183,7 +1183,9 @@ public:
 * 这道题我感觉是可以 A 的
 * 常规写法超时
 * 思路就是前缀和加二分
-* `lower_bound`和`upper_bound`的使用技巧
+* `lower_bound`和`upper_bound`的使用技巧 
+* `lower_bound` -> lower_bound(begin, end, num) 从数组的 begin 位置到 end - 1 位置二分查找**第一个大于或等于**num的数字 找到返回该数字的地址 不存在则返回end 通过返回的地址减去起始地址begin 得到找到数字在数组中的下标
+* `upper_bound` -> upper_bound(begin, end, num) 从数组的 begin 位置到 end - 1 位置二分查找**第一个大于num**的数字 找到返回该数字的地址 不存在则返回end 通过返回的地址减去起始地址begin 得到找到数字在数组中的下标。
 
 ```cpp
 class Solution {
@@ -1278,4 +1280,29 @@ public:
 };
 ```
 
-# lwoer_bound
+* 主要还是没想到`lower_bound`
+
+```cpp
+class Solution {
+public:
+    vector<long long> minOperations(vector<int> &nums, vector<int> &queries) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        long long sum[n + 1]; // 前缀和
+        sum[0] = 0;
+        for (int i = 0; i < n; ++i)
+            sum[i + 1] = sum[i] + nums[i];
+
+        int m = queries.size();
+        vector<long long> ans(m);
+        for (int i = 0; i < m; ++i) {
+            int q = queries[i];
+            long long j = lower_bound(nums.begin(), nums.end(), q) - nums.begin();
+            long long left = q * j - sum[j]; // 蓝色面积
+            long long right = sum[n] - sum[j] - q * (n - j); // 绿色面积
+            ans[i] = left + right;
+        }
+        return ans;
+    }
+};
+```
