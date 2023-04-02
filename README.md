@@ -1306,3 +1306,234 @@ public:
     }
 };
 ```
+
+---
+
+### 2023-04-02 第 339 场周赛
+
+#### [最长平衡子字符串](https://leetcode.cn/problems/find-the-longest-balanced-substring-of-a-binary-string/)
+
+* 没想到第一题罚时了 5 次
+* 失误很大
+
+```cpp
+class Solution {
+public:
+    int findTheLongestBalancedSubstring(string s) {
+        int res = 0;
+        
+        int n = s.size();
+        
+        if (n == 0) return 0;
+        
+        int cnt = 0; // 遇到 0 加一 遇到 1 减 一
+        
+        int l = -1, r = -1; // 记录第一次遇到的 0 和最后一次遇到的 1
+        
+        vector<int> idx;
+        
+        for (int i = 0; i < n; i ++) {
+          if (s[i] == '0') {
+            idx.push_back(i);
+          }  
+        }
+        
+        for (auto j : idx) {
+            
+            cnt = 0, l = -1, r = -1;
+            
+            for (int i = j; i < n; i ++) {
+                if (s[i] == '0') {
+                    if (l < 0) l = i;
+                    
+                    if (i > 0 && s[i - 1] == '1') cnt = 0, l = i, r = -1;
+                    
+                    cnt ++;
+                }
+            
+                if (s[i] == '1') {
+                    cnt --;
+                
+                    if (cnt == 0) {
+                        r = i;
+                        res = max(res, r - l + 1);
+                    
+                        l = -1, r = -1;
+                    }
+                }
+            }
+        }
+        
+        return res;
+        
+        
+        /*for (int i = 0; i < n; i ++) {
+            if (s[i] == '0') {
+                if (l < 0) l = i;
+                
+                cnt ++;
+            }
+            
+            if (s[i] == '1') {
+                cnt --;
+                
+                if (cnt == 0) {
+                    r = i;
+                    res = max(res, r - l + 1);
+                    
+                    l = -1, r = -1;
+                }
+            }
+        }
+        
+        cnt = 0;
+        l = -1, r = -1;
+        
+        for (int i = n - 1; i >= 0; i --) {
+            if (s[i] == '1') {
+                if (r < 0) r = i;
+                
+                cnt --;
+            }
+            
+            if (s[i] == '0') {
+                cnt ++;
+                
+                if (cnt == 0) {
+                    l = i;
+                    
+                    res = max(res, r - l + 1);
+                    
+                    l = -1, r = -1;
+                }
+            }
+        }
+        
+        return res;*/
+    }
+};
+```
+
+---
+
+#### [转换二维数组](https://leetcode.cn/problems/convert-an-array-into-a-2d-array-with-conditions/description/)
+
+* 第二题没什么好说的
+* 正常做就行 进行了一点小优化
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> findMatrix(vector<int>& nums) {
+        vector<vector<int>> res;
+        
+        sort(nums.begin(), nums.end());
+        
+        vector<int> idx;
+        unordered_map<int, int> al;
+        int sum = 0;
+        
+        for (int i = 0; i < nums.size(); i ++) {
+            
+            if (al[nums[i]] == 0) {
+                idx.push_back(nums[i]);
+            }
+            
+            al[nums[i]] ++;
+            
+            sum += nums[i];
+        }
+        
+        vector<int> tem;
+        
+        while (sum) {
+            for (int i = 0; i < idx.size(); i ++) {
+                if (al[idx[i]] > 0) {
+                    tem.push_back(idx[i]);
+                    
+                    al[idx[i]] --;
+                    
+                    sum -= idx[i];
+                }
+            }
+            
+            res.push_back(tem);
+            
+            tem.clear();
+        }
+        
+        return res;
+    }
+};
+```
+
+---
+
+#### [老鼠和奶酪](https://leetcode.cn/problems/mice-and-cheese/)
+
+* 这道题用 DFS 加剪枝还是超时了
+* 思路应该是没什么问题
+
+```cpp
+class Solution {
+public:
+    int miceAndCheese(vector<int>& reward1, vector<int>& reward2, int k) {
+        // 需要在奶酪里选 k 块吃
+        // 贪心？ 老鼠一吃的都是最大的奶酪
+        // 会不会把老鼠二更大的分吞掉？
+        // 组合？
+        
+        int n = reward1.size();
+        
+        vector<vector<int>> idx;
+        vector<vector<int>> cnt;
+        
+        vector<int> tem;
+        // vector<int> tem_1;
+            
+        int res = 0;
+        
+        vector<int> n1;
+        vector<int> n2;
+        
+        int sum_r2 = 0;
+        
+        for (int i = 0; i < reward2.size(); i ++) sum_r2 += reward2[i];
+        
+        int sum = 0;
+        int len = 0;
+        
+        function<void(int)> dfs = [&](int i) {
+            if (len + (n - i) < k ) return ;
+            
+            
+            if (len == k) {
+                
+                res = max(res, sum + sum_r2);
+                
+                return ;
+                
+            } 
+            
+            dfs(i + 1);
+            
+            len ++;
+            sum += reward1[i];
+            sum_r2 -= reward2[i];
+            
+            dfs(i + 1);
+            len --;
+
+            sum -= reward1[i];
+            sum_r2 += reward2[i];
+        };
+        
+        dfs(0);
+    
+        return res;
+        
+    }
+};
+```
+
+---
