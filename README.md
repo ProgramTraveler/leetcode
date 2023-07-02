@@ -17,3 +17,5 @@
 #### [2023-03-26 第 338场周赛](https://github.com/ProgramTraveler/leetcode/wiki/2023-03-26-%E7%AC%AC-338%E5%9C%BA%E5%91%A8%E8%B5%9B)
 
 #### [2023-04-02 第 339 场周赛](https://github.com/ProgramTraveler/leetcode/wiki/2023-04-02-%E7%AC%AC-339-%E5%9C%BA%E5%91%A8%E8%B5%9B)
+
+#### [2023-07-02 第 352 场周赛](https://github.com/ProgramTraveler/leetcode/wiki/2023-07-02-%E7%AC%AC-352-%E5%9C%BA%E5%91%A8%E8%B5%9B)
