@@ -20,27 +20,24 @@ public:
     ListNode* swapPairs(ListNode* head) {
         if(!head) return nullptr; //如果链表为空，就直接返回空值
 
-        ListNode* tempNode=new ListNode(0); //定义一个临时节点，方便返回
-        tempNode->next=head; //指向头节点
-        ListNode*prev=tempNode; 
+        ListNode* tempNode = new ListNode(0); //定义一个临时节点，方便返回
+        tempNode -> next = head; //指向头节点
+        ListNode* prev = tempNode; 
 
-        ListNode* first=head;
+        ListNode* first = head;
         
-
-        while(first!=nullptr && first->next!=nullptr){
-            ListNode* last=first->next;
+        while(first != nullptr && first -> next != nullptr) {
+            ListNode* last = first -> next;
             //相邻节点交换
-            first->next=last->next;
-            last->next=first;
-            prev->next=last;
+            first -> next = last -> next;
+            last -> next = first;
+            prev -> next = last;
             //更新节点位置
-            prev=first;
-            first=first->next;
+            prev = first;
+            first = first -> next;
         }
 
-        return tempNode->next;
-        
-        
+        return tempNode -> next;        
     }
 };
 // @lc code=end
