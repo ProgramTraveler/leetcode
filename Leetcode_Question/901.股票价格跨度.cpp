@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+
 class StockSpanner {
 public:
     StockSpanner() {
@@ -34,10 +35,5 @@ private:
  * int param_1 = obj->next(price);
  */
 
-/**
- * Your StockSpanner object will be instantiated and called as such:
- * StockSpanner* obj = new StockSpanner();
- * int param_1 = obj->next(price);
- */
 // @lc code=end
 
