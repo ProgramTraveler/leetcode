@@ -24,18 +24,14 @@ using namespace std;
 #include <vector>
 // @lcpr-template-end
 // @lc code=start
-class Solution
-{
+class Solution {
 public:
-  string makeSmallestPalindrome(string s)
-  {
+  string makeSmallestPalindrome(string s) {
     // 无脑双指针
     int l = 0, r = s.size() - 1;
 
-    while (l <= r)
-    {
-      if (s[l] != s[r])
-      { // 如果二者不相同，按照题目要求 字典序最小
+    while (l <= r) {
+      if (s[l] != s[r]) { // 如果二者不相同，按照题目要求 字典序最小
         int min_int = std::fmin(s[l] - 'a', s[r] - 'a');
         char min_c = min_int + 'a';
 
