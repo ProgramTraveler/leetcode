@@ -28,7 +28,18 @@ using namespace std;
 class Solution {
 public:
     int countTestedDevices(vector<int>& batteryPercentages) {
-        
+        int res = 0;
+
+        for (int i = 0; i < static_cast<int>(batteryPercentages.size()); i ++) {
+            int curr = std::fmax(batteryPercentages.at(i) - res, 0);
+            if (curr == 0) {
+                continue;
+            } else {
+                res ++;
+            }
+        }
+
+        return res;
     }
 };
 // @lc code=end
