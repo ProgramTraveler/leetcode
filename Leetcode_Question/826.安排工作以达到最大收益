@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxProfitAssignment(vector<int>& difficulty, vector<int>& profit, vector<int>& worker) {
+        int n = difficulty.size();
+        std::vector<std::pair<int, int>> jobs(n);
+        for (int i = 0; i < n; i ++) {
+            jobs[i] = std::make_pair(difficulty.at(i), profit.at(i));
+        }
+        ranges::sort(jobs);
+        ranges::sort(worker);
+        int ans = 0, j = 0, max_profit = 0;
+        for (int w : worker) {
+            while (j < n && jobs[j].first <= w) {
+                max_profit = std::fmax(max_profit, jobs[j ++].second);
+            }
+            ans += max_profit;
+        }
+
+        return ans;
+    }
+};

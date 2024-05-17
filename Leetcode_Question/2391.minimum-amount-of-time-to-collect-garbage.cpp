@@ -41,20 +41,19 @@ public:
         int m_idx = 0;
         for (int i = 0; i < static_cast<int>(garbage.size()); i ++) {
           const string& gar = garbage.at(i);
+          cnt += gar.size();
           if (gar.find("G") != std::string::npos) {
-            cnt ++;
             g_idx = i;
           } 
           if (gar.find("P") != std::string::npos) {
-            cnt ++;
             p_idx = i;
           }
           if (gar.find("M") != std::string::npos) {
-            cnt ++;
             m_idx = i;
           }
         }
 
+        std::cout << cnt << " " << f.at(g_idx) << " " << f.at(p_idx) << " " << f.at(m_idx) << endl;
         res = cnt + f.at(g_idx) + f.at(p_idx) + f.at(m_idx);
 
         return res;
